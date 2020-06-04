@@ -9,6 +9,7 @@ const init = () => {
   fight.strengthCard();
   sleep.sleepCard();
   play.playCard();
+  eat.clickEvents();
 };
 
 init();
