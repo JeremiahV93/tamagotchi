@@ -1,8 +1,9 @@
 import utils from '../helpers/utils';
-
-let strength = 100;
+import stats from '../helpers/data/data';
 
 const strengthCard = () => {
+  const strength = stats.getStrenght();
+
   let domString = '';
   domString += `
   <h1>Fight</h1>
@@ -12,40 +13,5 @@ const strengthCard = () => {
   utils.printToDom('#fight', domString);
 };
 
-const subStrength = (thing) => {
-  let result = thing;
-  if (result !== 0) {
-    result -= 10;
-    if (result < 0) {
-      result = 0;
-    }
-  }
-  strength = result;
-};
-
-const addStrength = (thing) => {
-  let result = thing;
-  if (result !== 100) {
-    result += 1;
-    if (result > 100) {
-      result = 100;
-    }
-  }
-  strength = result;
-};
-
-const violentEvent = () => {
-  subStrength(strength);
-  strengthCard();
-};
-
-const fleeEvent = () => {
-  addStrength(strength);
-  strengthCard();
-};
-
-
-$('body').on('click', '#runAway', fleeEvent);
-$('body').on('click', '#fightBack', violentEvent);
 
 export default { strengthCard };
