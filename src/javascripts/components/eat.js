@@ -1,7 +1,7 @@
 import utils from '../helpers/utils';
 // import data from '../helpers/data/data';
 
-const eat = 100;
+let eat = 100;
 
 const eatCard = () => {
   let domString = '';
@@ -13,21 +13,40 @@ const eatCard = () => {
   utils.printToDom('#eat', domString);
 };
 
-const subAttribute = (attribute) => {
-  if (attribute === 100) {
-    console.error('Can not do that');
+const subAttribute = (thing) => {
+  let result = thing;
+  if (result !== 0) {
+    result -= 3;
+    if (result < 0) {
+      result = 0;
+    }
   }
-  // else {
-  //   attribute - Number;
-  // }
+  eat = result;
+};
+
+const addAttribute = (thing) => {
+  let result = thing;
+  if (result < 100) {
+    result += 10;
+    if (result > 100) {
+      result = 100;
+    }
+  }
+  eat = result;
+};
+
+const candyEvent = () => {
+  subAttribute(eat);
+  eatCard();
 };
 
 const healthyEvent = () => {
-  subAttribute(eat);
+  addAttribute(eat);
+  eatCard();
 };
 
-const clickEvents = () => {
-  $('.healthyMeal').click(healthyEvent);
-};
 
-export default { eatCard, eat, clickEvents };
+$('body').on('click', '#healthyMeal', healthyEvent);
+$('body').on('click', '#candy', candyEvent);
+
+export default { eatCard, eat };
